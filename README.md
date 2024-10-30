@@ -1,0 +1,1 @@
+# solid-hack-typed-routes
