@@ -1,32 +1,78 @@
-# SolidStart
+# Solid Typed Routes Plugin
 
-Everything you need to build a Solid project, powered by [`solid-start`](https://start.solidjs.com);
+A Vite plugin for generating typed routes for Solid.js applications. This plugin also creates search params validation if you export a `searchParams` object from the route.
 
-## Creating a project
+## Demo
+There are some routes included in the demo, using the generated typed routes from `src/typedRoutes.gen.ts` and `src/typedSearchParams.gen.ts`. They offer auto-completion and types for various hooks and components in the Solid world.
 
+## Installation
+
+This plugin is still in active development and it is not published on npm or other registries. To try it out, install via
 ```bash
-# create a new project in the current directory
-npm init solid@latest
-
-# create a new project in my-app
-npm init solid@latest my-app
+npm i git+https://github.com/alfredomariamilano/solid-typed-router.git --save-dev
 ```
 
-## Developing
+## Usage
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Add the plugin to your Vite configuration:
+```typescript
+import { defineConfig } from 'vite';
+import solid from 'vite-plugin-solid';
+import { solidTypedRoutesPlugin } from 'solid-typed-routes-plugin';
 
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+export default defineConfig({
+  plugins: [
+    solid(),
+    solidTypedRoutesPlugin({
+      // options
+    }),
+  ],
+});
 ```
 
-## Building
+## Options
 
-Solid apps are built with _presets_, which optimise your project for deployment to different environments.
+The plugin accepts the following options:
 
-By default, `npm run build` will generate a Node app that you can run with `npm start`. To use a different preset, add it to the `devDependencies` in `package.json` and specify in your `app.config.js`.
+- routesDefinitions (default: `[]`): Array of route definitions.
+- searchParamsSchemas (default: `{}`): Definition of the search params schemas.
+- root (default: `process.cwd()`): The root directory of the project.
+- routesPath (default: `'src/routes'`): The path to the routes directory.
+- typedRoutesPath (default: `'src/typedRoutes.gen.ts'`): The path to the typed routes file.
+- typedSearchParamsPath (default: `'src/typedSearchParams.gen.ts'`): The path to the typed search params file.
+- replacements (default: `{ ':': '$', '*': '$$', '.': '_dot_', '-': '_dash_', '+': '_plus_' }`): Custom replacements for route parameters and route names.
 
-## This project was created with the [Solid CLI](https://solid-cli.netlify.app)
+## Search Params Validation
+
+If you export a searchParams object from a route, the plugin will automatically create search params validation for that route. You need `valibot` >= 1 installed. Do so by running `npm i valibot@^1.0.0-beta.3`.
+```typescript
+import { createSearchParams } from "@/generated/typedRoutes.gen"
+import { object, optional, pipe, string, transform } from "valibot"
+
+const searchParamsSchema = optional(
+    object({
+      thing: string(),
+    }),
+    {
+      thing: 'thing',
+    },
+  )
+
+export const searchParams = createSearchParams('/thisroute', searchParamsSchema)
+```
+
+If you want to use the search params from other routes other than the current one, you can either import the generated `typedSearchParams.gen.ts` file in your app's entry
+```typescript
+import '~/typedSearchParams.gen.ts'
+```
+or you will have to preload the route
+```typescript
+// The example is in Solid Start
+import type { RouteDefinition } from '@solidjs/router'
+
+export const route = {
+  preload() {
+    // do anything  or nothing at all
+  } as RouteDefinition
+}
+```
