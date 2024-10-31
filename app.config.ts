@@ -1,5 +1,9 @@
+import path from 'node:path'
+import url from 'node:url'
 import { defineConfig } from '@solidjs/start/config'
 import { solidTypedRoutesPlugin } from 'solid-typed-router'
+
+const root = import.meta.dirname || path.dirname(url.fileURLToPath(import.meta.url))
 
 export default defineConfig({
   vite({ router }) {
@@ -7,7 +11,7 @@ export default defineConfig({
       return {
         plugins: [
           solidTypedRoutesPlugin({
-            root: import.meta.dirname,
+            root,
           }),
         ],
       }
