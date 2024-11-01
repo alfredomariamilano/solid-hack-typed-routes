@@ -25,10 +25,10 @@ export default () => {
   const params = useTypedParams('/:nested/searchParams')
   const typedNavigate = useTypedNavigate()
 
-  const [searchParams_, setSearchParams] = useTypedSearchParams('/:nested/searchParams')
+  const [searchParams, setSearchParams] = useTypedSearchParams('/:nested/searchParams')
 
   // set the default values and replace the current location
-  // setSearchParams({}, { replace: true })
+  setSearchParams({}, { replace: true })
 
   return (
     <div>
@@ -41,6 +41,7 @@ export default () => {
               params: {
                 $nested: (e.target as HTMLInputElement).value,
               },
+              search: searchParams(),
             })
           }}
         />
@@ -72,7 +73,7 @@ export default () => {
             setSearchParams({
               random: {
                 current: random,
-                history: [...searchParams_()!.random!.history!, random],
+                history: [...searchParams()!.random!.history!, random],
               },
             })
           }}
@@ -92,7 +93,7 @@ export default () => {
           {'Clear random.history'}
         </button>
 
-        <pre>{JSON.stringify(searchParams_(), null, 2)}</pre>
+        <pre>{JSON.stringify(searchParams(), null, 2)}</pre>
       </div>
     </div>
   )
