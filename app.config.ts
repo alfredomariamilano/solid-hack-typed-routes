@@ -9,6 +9,10 @@ export default defineConfig({
   vite({ router }) {
     if (router !== 'server-function') {
       return {
+        server: {
+          // use this to open the correct port in Stackblitz
+          preview: true,
+        },
         plugins: [
           solidTypedRouterPlugin({
             root,
