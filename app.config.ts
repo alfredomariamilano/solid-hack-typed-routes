@@ -24,6 +24,7 @@ export default defineConfig({
     if (router !== 'server-function') {
       return {
         plugins: [
+          openBrowserPlugin,
           solidTypedRouterPlugin({
             root,
           }),
