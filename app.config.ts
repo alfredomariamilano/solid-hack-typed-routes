@@ -14,7 +14,8 @@ export default defineConfig({
       configResolved(config) {
         import('open').then(({ default: open }) => {
           if (!launchedBrowser) {
-            open(`http://0.0.0.0:${config.dev.port}`)
+            open(`::${config.dev.port}`)
+
             launchedBrowser = true
           }
         })
