@@ -4,7 +4,7 @@ import {
   useTypedNavigate,
   useTypedParams,
   useTypedSearchParams,
-} from '~/typedRoutes.gen'
+} from '~/typedRouter.gen'
 
 const getRandom = () => `${Math.round(Math.random() * 100)}`
 

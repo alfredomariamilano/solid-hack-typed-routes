@@ -1,6 +1,6 @@
 import { Title } from '@solidjs/meta'
 import { HttpStatusCode } from '@solidjs/start'
-import { useTypedNavigate, useTypedParams } from '~/typedRoutes.gen'
+import { useTypedNavigate, useTypedParams } from '~/typedRouter.gen'
 
 export default function NotFound() {
   const params = useTypedParams('/*404')
