@@ -1,5 +1,14 @@
 import { Title } from '@solidjs/meta'
+import { number, object, optional } from 'valibot'
 import Counter from '~/components/Counter'
+import { createSearchParams } from '~/typedRouter.gen'
+
+export const searchParams = createSearchParams(
+  '/',
+  object({
+    count: optional(number(), 0),
+  }),
+)
 
 export default function Home() {
   return (

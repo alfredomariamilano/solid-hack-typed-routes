@@ -1,11 +1,19 @@
-import { createSignal } from 'solid-js'
 import './Counter.css'
+import { useTypedSearchParams } from '~/typedRouter.gen'
 
 export default function Counter() {
-  const [count, setCount] = createSignal(0)
+  const [searchParams, setSearchParams] = useTypedSearchParams('/')
+
   return (
-    <button class="increment" onClick={() => setCount(count() + 1)} type="button">
-      Clicks: {count()}
+    <button
+      class="increment"
+      onClick={() => {
+        const count = searchParams().count! + 1
+        setSearchParams({ count })
+      }}
+      type="button"
+    >
+      Clicks: {searchParams().count}
     </button>
   )
 }
