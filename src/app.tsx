@@ -25,9 +25,9 @@ export default function App() {
             </button>
 
             <TypedLink
-              href={routesMap.$nested.searchParams.route}
+              href={routesMap.nested.searchParams.route}
               params={{
-                $nested: 'typed',
+                nested: 'typed',
               }}
               search={{
                 timestamp: 1,
@@ -47,7 +47,7 @@ export default function App() {
 
                 typedNavigate('/*404', {
                   params: {
-                    $$404: 'not-found',
+                    404: 'not-found',
                   },
                 })
               }}

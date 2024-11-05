@@ -35,11 +35,11 @@ export default () => {
       <div>
         <h1>{'URL Params'}</h1>
         <input
-          value={params().$nested}
+          value={params().nested}
           onInput={e => {
             typedNavigate('/:nested/searchParams', {
               params: {
-                $nested: (e.target as HTMLInputElement).value,
+                nested: (e.target as HTMLInputElement).value,
               },
               search: searchParams(),
             })

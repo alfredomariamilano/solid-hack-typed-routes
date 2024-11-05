@@ -14,11 +14,11 @@ export default function NotFound() {
       <div style={{ 'text-align': 'left' }}>
         <h1>{'URL Params'}</h1>
         <input
-          value={params().$$404}
+          value={params()[404]}
           onInput={e => {
             typedNavigate('/*404', {
               params: {
-                $$404: (e.target as HTMLInputElement).value,
+                404: (e.target as HTMLInputElement).value,
               },
             })
           }}
