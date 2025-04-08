@@ -2,7 +2,6 @@
   "name": "example-basic",
   "type": "module",
   "scripts": {
-    "postinstall": "npm i git+https://github.com/alfredomariamilano/solid-typed-router.git --save-dev --force",
     "dev": "vinxi dev",
     "build": "vinxi build",
     "start": "vinxi start",
