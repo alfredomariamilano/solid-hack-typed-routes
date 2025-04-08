@@ -22,8 +22,8 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@bizarreal/vite-plugin-solid-typed-router": "github:alfredomariamilano/solid-typed-router",
-    "cross-env": "^7.0.3",
-    "vite-plugin-solid-typed-router": "github:alfredomariamilano/solid-typed-router"
+    "@bizarreal/vite-plugin-solid-typed-router": "^0.0.10",
+    "@types/node": "^22.14.0",
+    "cross-env": "^7.0.3"
   }
 }
